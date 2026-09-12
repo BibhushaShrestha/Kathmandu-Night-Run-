@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import HomePage from "./pages/public/Home.jsx";
 import AboutPage from "./pages/public/About.jsx";
+import ServicesPage from "./pages/public/Services.jsx";
+import EventsPage from "./pages/public/Events.jsx";
 import AdminLogin from "./pages/admin/AdminLogin.jsx";
 import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
 
@@ -14,8 +16,12 @@ function PublicShell() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
-      if (hash === "#about" || hash.includes("about")) {
+      if (hash === "#about" || hash.includes("about-hero")) {
         setCurrentPath("about");
+      } else if (hash.includes("services-hero")) {
+        setCurrentPath("services");
+      } else if (hash.includes("events-hero")) {
+        setCurrentPath("events");
       } else if (hash === "#home" || hash === "#hero" || hash === "") {
         setCurrentPath("home");
       }
@@ -42,7 +48,11 @@ function PublicShell() {
       setCurrentPath(targetPath);
       window.scrollTo({ top: 0, behavior: "instant" });
       if (targetPath === "about") {
-        window.location.hash = "about";
+        window.location.hash = "about-hero";
+      } else if (targetPath === "services") {
+        window.location.hash = "services-hero";
+      } else if (targetPath === "events") {
+        window.location.hash = "events-hero";
       } else if (targetHash) {
         window.location.hash = targetHash.replace("#", "");
       } else {
@@ -67,6 +77,10 @@ function PublicShell() {
     >
       {currentPath === "about" ? (
         <AboutPage onNavigate={handleNavigate} />
+      ) : currentPath === "services" ? (
+        <ServicesPage onNavigate={handleNavigate} />
+      ) : currentPath === "events" ? (
+        <EventsPage onNavigate={handleNavigate} />
       ) : (
         <HomePage onNavigate={handleNavigate} />
       )}

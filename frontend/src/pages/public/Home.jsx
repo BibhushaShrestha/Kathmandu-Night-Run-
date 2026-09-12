@@ -7,8 +7,10 @@ import FullMoonEvent from "../../sections/FullMoonEvent.jsx";
 import AfterDark from "../../sections/AfterDark.jsx";
 import RunWithUs from "../../sections/RunWithUs.jsx";
 import FieldNotes from "../../sections/FieldNotes.jsx";
+import Gallery from "../../sections/Gallery.jsx"; 
 import Testimonials from "../../sections/Testimonials.jsx";
 import CTAFooter from "../../sections/CTAFooter.jsx";
+import Footer from "../../components/Footer.jsx";
 
 export default function HomePage({ onNavigate }) {
   return (
@@ -21,8 +23,10 @@ export default function HomePage({ onNavigate }) {
       <AfterDark />
       <RunWithUs />
       <FieldNotes />
+      <Gallery />
       <Testimonials />
       <CTAFooter />
+      <Footer onNavigate={onNavigate} />
     </div>
   );
 }

@@ -8,12 +8,15 @@ export default function Header({ currentPath = "home", onNavigate }) {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
     };
+
     window.addEventListener("scroll", handleScroll);
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+
     return () => {
       document.body.style.overflow = "";
     };
@@ -22,8 +25,8 @@ export default function Header({ currentPath = "home", onNavigate }) {
   const navLinks = [
     { name: "HOME", path: "home", href: "#hero" },
     { name: "ABOUT", path: "about", href: "#our-story" },
-    { name: "SERVICES", path: "home", href: "#services" },
-    { name: "EVENTS", path: "home", href: "#next-event" },
+    { name: "SERVICES", path: "services", href: "#services-hero" },
+    { name: "EVENTS", path: "events", href: "#events-hero" },
     { name: "ROUTES", path: "home", href: "#after-dark" },
     { name: "FIELD NOTES", path: "home", href: "#field-notes" },
     { name: "GALLERY", path: "home", href: "#run-with-us" },
@@ -33,24 +36,37 @@ export default function Header({ currentPath = "home", onNavigate }) {
   const handleLinkClick = (e, link) => {
     if (onNavigate) {
       e.preventDefault();
+
       if (link.name === "ABOUT") {
         onNavigate("about");
+      } else if (link.name === "SERVICES") {
+        onNavigate("services");
+      } else if (link.name === "EVENTS") {
+        onNavigate("events");
       } else if (link.name === "HOME") {
         onNavigate("home");
       } else {
         onNavigate("home", link.href);
       }
     }
+
     setOpen(false);
   };
 
   return (
     <header className={`header-root ${scrolled ? "scrolled" : ""}`}>
       <div className="header-container">
+
         {/* Brand Logo */}
         <a
           href="#hero"
-          onClick={(e) => handleLinkClick(e, { name: "HOME", path: "home", href: "#hero" })}
+          onClick={(e) =>
+            handleLinkClick(e, {
+              name: "HOME",
+              path: "home",
+              href: "#hero",
+            })
+          }
           className="header-logo"
         >
           <div className="header-logo-top">KATHMANDU</div>
@@ -60,7 +76,12 @@ export default function Header({ currentPath = "home", onNavigate }) {
         {/* Desktop Navigation */}
         <nav className="header-nav">
           {navLinks.map((link) => {
-            const isActive = (link.name === "ABOUT" && currentPath === "about") || (link.name === "HOME" && currentPath === "home");
+            const isActive =
+              (link.name === "ABOUT" && currentPath === "about") ||
+              (link.name === "SERVICES" && currentPath === "services") ||
+              (link.name === "EVENTS" && currentPath === "events") ||
+              (link.name === "HOME" && currentPath === "home");
+
             return (
               <a
                 key={link.name}
@@ -77,7 +98,13 @@ export default function Header({ currentPath = "home", onNavigate }) {
         {/* CTA Button */}
         <a
           href="#next-event"
-          onClick={(e) => handleLinkClick(e, { name: "HOME", path: "home", href: "#next-event" })}
+          onClick={(e) =>
+            handleLinkClick(e, {
+              name: "HOME",
+              path: "home",
+              href: "#next-event",
+            })
+          }
           className="btn-gold header-cta"
         >
           JOIN THE NEXT RUN
@@ -89,11 +116,24 @@ export default function Header({ currentPath = "home", onNavigate }) {
           className="mobile-toggle"
           aria-label="Toggle menu"
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
             {open ? (
-              <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round" />
+              <path
+                d="M18 6L6 18M6 6l12 12"
+                strokeLinecap="round"
+              />
             ) : (
-              <path d="M4 6h16M4 12h16M4 18h16" strokeLinecap="round" />
+              <path
+                d="M4 6h16M4 12h16M4 18h16"
+                strokeLinecap="round"
+              />
             )}
           </svg>
         </button>
@@ -117,9 +157,18 @@ export default function Header({ currentPath = "home", onNavigate }) {
 
         <a
           href="#next-event"
-          onClick={(e) => handleLinkClick(e, { name: "HOME", path: "home", href: "#next-event" })}
+          onClick={(e) =>
+            handleLinkClick(e, {
+              name: "HOME",
+              path: "home",
+              href: "#next-event",
+            })
+          }
           className="btn-gold"
-          style={{ marginTop: "2rem", width: "fit-content" }}
+          style={{
+            marginTop: "2rem",
+            width: "fit-content",
+          }}
         >
           JOIN THE NEXT RUN
         </a>

@@ -8,28 +8,29 @@ export default function RunWithUs() {
       title: "Full Moon Run",
       sub: "To be announced",
       rows: ["Kathmandu Valley outskirts", "To be announced", "To be announced"],
-      image: "/images/full_moon.jpg",
+      image: "src/assets/group1.jpg",
     },
     {
       tag: "FULL MOON",
       title: "Kathmandu After Dark — Heritage Loop",
       sub: "To be announced",
       rows: ["Inner Kathmandu", "To be announced", "To be announced"],
-      image: "/images/hero.jpg",
+      image: "src/assets/view.jpg",
     },
-    {
-      tag: "SPECIAL EVENTS",
-      title: "Private Milestone Night Run",
-      sub: "By arrangement",
-      rows: ["Kathmandu Valley or chosen location", "Designed with you", "Designed with you"],
-      image: "/images/exp_specialized.jpg",
-    },
+   
     {
       tag: "TRAIL RUNS",
       title: "Nepal Trail Running Journey",
       sub: "Departures on request",
       rows: ["Pokhara · Dhading · Mustang", "Built to your weekly mileage", "Moderate to hard"],
-      image: "/images/exp_trail.jpg",
+      image: "src/assets/nightrun2.jpg",
+    },
+     {
+      tag: "SPECIAL EVENTS",
+      title: "Private Milestone Night Run",
+      sub: "By arrangement",
+      rows: ["Kathmandu Valley or chosen location", "Designed with you", "Designed with you"],
+      image: "src/assets/temple.jpg",
     },
   ];
 

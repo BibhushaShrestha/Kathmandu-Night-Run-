@@ -1,22 +1,13 @@
 import React, { useEffect } from "react";
 import Header from "../../components/Header.jsx";
 import ScrollReveal from "../../components/ScrollReveal.jsx";
+import Footer from "../../components/Footer.jsx";
 
 export default function AboutPage({ onNavigate }) {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
-  const navLinks = [
-    { name: "Home", href: "#hero" },
-    { name: "About", href: "#about-hero" },
-    { name: "Services", href: "#services" },
-    { name: "Events", href: "#next-event" },
-    { name: "Routes", href: "#after-dark" },
-    { name: "Field Notes", href: "#field-notes" },
-    { name: "Gallery", href: "#run-with-us" },
-    { name: "Contact", href: "#footer" },
-  ];
 
   return (
     <div style={{ fontFamily: "var(--font-body)", color: "var(--color-black)", backgroundColor: "var(--color-black)", minHeight: "100vh", overflowX: "hidden" }}>
@@ -28,7 +19,7 @@ export default function AboutPage({ onNavigate }) {
         {/* Background Image & Overlay */}
         <div className="hero-bg">
           <img
-            src="/images/our_story.jpg"
+            src="/src/assets/four_friends.jpg"
             alt="Kathmandu Night Run Team Four Friends"
             className="hero-img"
             style={{ filter: "grayscale(100%) brightness(60%) contrast(130%)" }}
@@ -50,13 +41,14 @@ export default function AboutPage({ onNavigate }) {
             <h1 className="hero-headline" style={{ fontSize: "clamp(3.5rem, 14vw, 8rem)" }}>
               OUR
               <br />
-              STORY.
+              ORIGINS
             </h1>
           </ScrollReveal>
 
           <ScrollReveal variant="fade-up" delay={350}>
             <p className="hero-subtext" style={{ fontSize: "1.25rem", maxWidth: "36rem" }}>
-              Kathmandu Night Run started with four friends exploring Kathmandu after dark, and grew into a running community and an adventure-running venture.
+              Four friends who bonded over a shared appetite of trails, culture and a sense of wanderlust of the country they lived in, built a community without any intention. Taking hundreds running, through temples and routes beyond the tourist path, an adventure running venture formed.
+
             </p>
           </ScrollReveal>
         </div>
@@ -84,7 +76,7 @@ export default function AboutPage({ onNavigate }) {
             <ScrollReveal variant="fade-right" delay={150} duration={900}>
               <div className="story-img-container">
                 <img
-                  src="/images/our_story.jpg"
+                  src="/src/assets/four_friends.jpg"
                   alt="Four Friends How It Started"
                   className="story-img"
                 />
@@ -102,7 +94,7 @@ export default function AboutPage({ onNavigate }) {
 
             <ScrollReveal variant="fade-up" delay={200} duration={850}>
               <h2 className="story-headline">
-                HOW IT STARTED
+                 How our journey began
               </h2>
             </ScrollReveal>
 
@@ -118,7 +110,7 @@ export default function AboutPage({ onNavigate }) {
                   Kathmandu Night Run began with four friends who wanted to see their own city without the traffic, the crowds and the noise in the way. The first runs had no route and no plan — just a few torches and a direction.
                 </p>
                 <p>
-                  What they found was a different Kathmandu. Temple squares standing empty. Streets you could hear your own footsteps on. Hill roads at the edge of the valley that felt a long way from the city they had just left.
+                  What they found was a different Kathmandu. Temple squares standing empty. Streets you could hear your own footsteps on. Trails at the edge of the valley that felt a long way from the city they had just left.
                 </p>
               </div>
             </ScrollReveal>
@@ -169,7 +161,7 @@ export default function AboutPage({ onNavigate }) {
             <ScrollReveal variant="fade-left" delay={250} duration={900}>
               <div className="story-img-container" style={{ backgroundColor: "#0E1E18", border: "1px solid rgba(255,255,255,0.1)" }}>
                 <img
-                  src="/images/exp_specialized.jpg"
+                  src="/src/assets/nightrun2.jpg"
                   alt="Runners sitting on temple steps at night"
                   className="story-img"
                 />
@@ -190,7 +182,7 @@ export default function AboutPage({ onNavigate }) {
             <ScrollReveal variant="fade-right" delay={150} duration={900}>
               <div className="story-img-container">
                 <img
-                  src="/images/hero.jpg"
+                  src="/src/assets/group2.jpg"
                   alt="Runner in moonlit night alleyway"
                   className="story-img"
                   style={{ filter: "grayscale(100%) contrast(140%)" }}
@@ -276,7 +268,7 @@ export default function AboutPage({ onNavigate }) {
             <ScrollReveal variant="fade-left" delay={250} duration={900}>
               <div className="story-img-container" style={{ backgroundColor: "#0E1E18", border: "1px solid rgba(255,255,255,0.1)" }}>
                 <img
-                  src="/images/full_moon.jpg"
+                  src="/src/assets/kathmandu_valley.jpg"
                   alt="Boudhanath Stupa under Full Moon"
                   className="story-img"
                 />
@@ -423,88 +415,7 @@ export default function AboutPage({ onNavigate }) {
 
 
       {/* ==================== 9. EXACT ABOUT FOOTER (NEW IMAGE 2) ==================== */}
-      <footer id="footer" className="footer-root">
-        <div className="container-max footer-grid">
-          {/* Brand Col */}
-          <div className="footer-col-brand">
-            <a
-              href="#hero"
-              onClick={(e) => {
-                e.preventDefault();
-                if (onNavigate) onNavigate("home");
-              }}
-              className="header-logo"
-              style={{ display: "block" }}
-            >
-              <div className="header-logo-top" style={{ fontSize: "1.5rem" }}>KATHMANDU</div>
-              <div className="header-logo-bottom" style={{ fontSize: "1.5rem" }}>NIGHT RUN</div>
-            </a>
-            <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.75rem", fontWeight: "700", letterSpacing: "0.2em", marginTop: "1rem", textTransform: "uppercase" }}>
-              EXPERIENCE KATHMANDU AFTER DARK.
-            </p>
-
-            <div style={{ marginTop: "2rem", display: "flex", flexDirection: "column", gap: "0.5rem", color: "rgba(255,255,255,0.7)", fontSize: "0.875rem" }}>
-              <p>@kathmandunightrun</p>
-              <p>hello@kathmandunightrun.com</p>
-              <p>Kathmandu, Nepal</p>
-            </div>
-          </div>
-
-          {/* Nav Col */}
-          <div className="footer-col-nav">
-            <div style={{ fontSize: "0.625rem", fontWeight: "800", letterSpacing: "0.25em", color: "rgba(255,255,255,0.4)", marginBottom: "1.25rem", textTransform: "uppercase" }}>NAVIGATE</div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "0.625rem", fontSize: "0.75rem", fontWeight: "700", textTransform: "uppercase" }}>
-              {navLinks.map((l) => (
-                <a
-                  key={l.name}
-                  href={l.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (onNavigate) {
-                      if (l.name === "About") onNavigate("about");
-                      else onNavigate("home", l.href);
-                    }
-                  }}
-                  style={{ color: "rgba(255,255,255,0.7)", textDecoration: "none" }}
-                >
-                  {l.name}
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Newsletter Col */}
-          <div className="footer-col-news">
-            <div style={{ fontSize: "0.625rem", fontWeight: "800", letterSpacing: "0.25em", color: "rgba(255,255,255,0.4)", marginBottom: "1.25rem", textTransform: "uppercase" }}>NEWSLETTER</div>
-            <h4 className="threeways-item-title" style={{ fontSize: "1.5rem" }}>
-              GET THE NEXT RUN IN YOUR INBOX.
-            </h4>
-            <form style={{ marginTop: "1.25rem", display: "flex", gap: "0.5rem", flexWrap: "wrap" }} onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="you@email.com"
-                style={{ flex: 1, minWidth: "180px", backgroundColor: "#161614", border: "1px solid rgba(255,255,255,0.2)", padding: "0.75rem 1rem", fontSize: "0.875rem", color: "#ffffff", outline: "none" }}
-              />
-              <button
-                type="submit"
-                className="btn-gold"
-                style={{ padding: "0.75rem 1.25rem" }}
-              >
-                SUBSCRIBE
-              </button>
-            </form>
-          </div>
-        </div>
-
-        {/* Bottom Credits */}
-        <div className="container-max" style={{ paddingTop: "2rem", borderTop: "1px solid rgba(255,255,255,0.1)", display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem", color: "rgba(255,255,255,0.4)", fontSize: "0.75rem" }}>
-          <span>© {new Date().getFullYear()} Kathmandu Night Run. All rights reserved.</span>
-          <div style={{ display: "flex", gap: "1.5rem" }}>
-            <a href="#privacy" style={{ color: "inherit", textDecoration: "none" }}>Privacy Policy</a>
-            <a href="#terms" style={{ color: "inherit", textDecoration: "none" }}>Terms of Service</a>
-          </div>
-        </div>
-      </footer>
+            <Footer onNavigate={onNavigate} />
     </div>
   );
 }

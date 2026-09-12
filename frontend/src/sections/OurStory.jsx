@@ -1,6 +1,6 @@
 import React from "react";
 import ScrollReveal from "../components/ScrollReveal.jsx";
-
+import four_friends from "../assets/four_friends.jpg";
 export default function OurStory() {
   return (
     <section id="our-story" className="story-section">
@@ -11,7 +11,7 @@ export default function OurStory() {
           <ScrollReveal variant="fade-right" delay={100} duration={900}>
             <div className="story-img-container">
               <img
-                src="/images/our_story.jpg"
+                src={four_friends}
                 alt="Four friends overlooking Kathmandu after dark"
                 className="story-img"
               />
@@ -52,10 +52,12 @@ export default function OurStory() {
           <ScrollReveal variant="fade-up" delay={350}>
             <div className="story-body">
               <p>
-                Kathmandu Night Run started with four friends exploring Kathmandu after dark. No route, no plan, a couple of torches between them and a suspicion that the city was more interesting once it stopped shouting.
+                Kathmandu Night Run began with four friends, no plan, no route  — just a few torches and a suspicion that the city was more interesting once it stopped shouting. 
+
               </p>
               <p>
-                What began as those late runs grew into a running community — and then into an adventure-running venture that designs private night events and curated trail journeys across Nepal.
+                 What started as late runs through empty streets, past hidden temples glowing in the dark and along trails with sweeping valley views, grew into a community. Later evolving into an adventure-running venture, now designing private night events and curated trail journeys across Nepal.
+
               </p>
             </div>
           </ScrollReveal>

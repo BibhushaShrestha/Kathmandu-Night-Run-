@@ -7,19 +7,19 @@ export default function FieldNotes() {
       tag: "FULL MOON RUNS",
       title: "The Valley Winds Down",
       desc: "There is a moment, somewhere after ten, when Kathmandu stops being a traffic problem and becomes a city again.",
-      image: "/images/full_moon.jpg",
+      image: "src/assets/kathmandu_valley.jpg",
     },
     {
       tag: "ROUTE GUIDES",
       title: "Running the Terraces of Dhading",
       desc: "Two hours from Kathmandu, the road runs out and the terraces start. Notes from a recon weekend.",
-      image: "/images/exp_trail.jpg",
+      image: "src/assets/night_run.jpg",
     },
     {
       tag: "TRAINING",
       title: "Training for Night Trail",
       desc: "Running in the dark is a skill, not a handicap. How to build it without scaring yourself off trail.",
-      image: "/images/exp_community.jpg",
+      image: "src/assets/nightrun3.jpg",
     },
   ];
 
@@ -43,7 +43,7 @@ export default function FieldNotes() {
               <div style={{ cursor: "pointer" }}>
                 <div style={{ aspectRatio: "4/3", backgroundColor: "#1A1A18", overflow: "hidden", boxShadow: "0 10px 30px rgba(0,0,0,0.1)" }}>
                   <img
-                    src="/images/our_story.jpg"
+                    src="src/assets/group1.jpg"
                     alt="What to Carry on a Full Moon Run"
                     style={{ width: "100%", height: "100%", objectFit: "cover", filter: "grayscale(100%) contrast(125%)" }}
                   />

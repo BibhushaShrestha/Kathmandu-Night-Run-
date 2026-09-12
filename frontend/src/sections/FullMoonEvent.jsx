@@ -1,5 +1,6 @@
 import React from "react";
 import ScrollReveal from "../components/ScrollReveal.jsx";
+import fullmoonrun from "../assets/fullmoonrun.jpg";
 
 export default function FullMoonEvent() {
   const specs = [
@@ -82,7 +83,7 @@ export default function FullMoonEvent() {
               </div>
 
               <img
-                src="/images/full_moon.jpg"
+                src={fullmoonrun}
                 alt="Full moon shining over Kathmandu night runners"
                 style={{ width: "100%", height: "100%", objectFit: "cover", filter: "grayscale(100%) contrast(125%)" }}
               />

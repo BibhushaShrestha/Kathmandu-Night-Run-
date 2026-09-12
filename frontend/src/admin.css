@@ -1284,6 +1284,8 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 @keyframes adminModalScaleUp {
@@ -1761,6 +1763,3 @@
 .admin-remove-image-btn:hover {
   color: #EF4444;
 }
-
-
-

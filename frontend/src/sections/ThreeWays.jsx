@@ -1,6 +1,7 @@
 import React from "react";
 import ScrollReveal from "../components/ScrollReveal.jsx";
 
+
 export default function ThreeWays() {
   const experiences = [
     {

@@ -1,16 +1,18 @@
 import React from "react";
 import ScrollReveal from "../components/ScrollReveal.jsx";
+import nightrun3 from "../assets/nightrun3.jpg";
 
 export default function Hero() {
   return (
     <section id="hero" className="hero-section">
       {/* Background Image & Vignette Overlays */}
       <div className="hero-bg">
-        <img
-          src="/images/hero.jpg"
-          alt="Kathmandu Night Run Stupa & Temples"
+         <img
+          src={nightrun3}
+          alt="running by carrying headlamp"
           className="hero-img"
         />
+
         <div className="hero-overlay-top" />
         <div className="hero-overlay-left" />
       </div>
@@ -37,7 +39,8 @@ export default function Hero() {
         {/* Subtitle */}
         <ScrollReveal variant="fade-up" delay={350}>
           <p className="hero-subtext">
-            Experience Kathmandu differently — through full moon runs, unforgettable events and trail-running journeys across Nepal.
+           Explore beyond the tourist trail with full moon runs, curated trail vacations and running experiences that take you deeper into Nepal — its trails, temples, communities and culture.
+
           </p>
         </ScrollReveal>
 
