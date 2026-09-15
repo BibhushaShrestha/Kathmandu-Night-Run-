@@ -30,7 +30,7 @@ export default function Header({ currentPath = "home", onNavigate }) {
     { name: "ROUTES", path: "home", href: "#after-dark" },
     { name: "FIELD NOTES", path: "home", href: "#field-notes" },
     { name: "GALLERY", path: "home", href: "#run-with-us" },
-    { name: "CONTACT", path: "home", href: "#footer" },
+    { name: "CONTACT", path: "contact", href: "#contact-hero" },
   ];
 
   const handleLinkClick = (e, link) => {
@@ -43,6 +43,8 @@ export default function Header({ currentPath = "home", onNavigate }) {
         onNavigate("services");
       } else if (link.name === "EVENTS") {
         onNavigate("events");
+      } else if (link.name === "CONTACT") {
+        onNavigate("contact");
       } else if (link.name === "HOME") {
         onNavigate("home");
       } else {
@@ -80,6 +82,7 @@ export default function Header({ currentPath = "home", onNavigate }) {
               (link.name === "ABOUT" && currentPath === "about") ||
               (link.name === "SERVICES" && currentPath === "services") ||
               (link.name === "EVENTS" && currentPath === "events") ||
+              (link.name === "CONTACT" && currentPath === "contact") ||
               (link.name === "HOME" && currentPath === "home");
 
             return (

@@ -1763,3 +1763,187 @@
 .admin-remove-image-btn:hover {
   color: #EF4444;
 }
+/* ==========================================================================
+   ADMIN ROUTES MANAGEMENT PAGE
+   ========================================================================== */
+.admin-routes-view {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: adminFadeIn 0.25s ease-out;
+}
+
+.admin-routes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 1100px) {
+  .admin-routes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 680px) {
+  .admin-routes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.admin-route-card {
+  background-color: #121814;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.admin-route-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(197, 160, 89, 0.35);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+}
+
+.admin-route-card-img-wrapper {
+  width: 100%;
+  height: 190px;
+  background-color: #0A0D0B;
+  overflow: hidden;
+}
+
+.admin-route-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.admin-route-card:hover .admin-route-card-img {
+  transform: scale(1.03);
+}
+
+.admin-route-card-body {
+  padding: 1.1rem 1.25rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  flex: 1;
+}
+
+.admin-route-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.admin-route-card-title {
+  font-size: 1.0625rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.admin-route-card-location {
+  font-size: 0.75rem;
+  color: #7D8D82;
+  margin: -0.35rem 0 0;
+}
+
+.admin-route-card-desc {
+  font-size: 0.8125rem;
+  color: #ADBBB2;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.admin-route-stats-row {
+  display: flex;
+  gap: 1.75rem;
+  margin-top: 0.15rem;
+}
+
+.admin-route-stat-label {
+  font-size: 0.625rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #5C6B61;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.15rem;
+}
+
+.admin-route-stat-value {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #C5A059;
+}
+
+.admin-route-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 0.35rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.admin-route-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent;
+  border: none;
+  color: #8A988E;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 2px 0;
+  transition: color 0.15s ease;
+}
+
+.admin-route-action-btn:hover {
+  color: #FFFFFF;
+}
+
+.admin-route-action-btn.delete:hover {
+  color: #EF4444;
+}
+
+/* Difficulty badges */
+.admin-badge-pill.easy {
+  background-color: rgba(34, 197, 94, 0.12);
+  color: #34D399;
+  border: 1px solid rgba(52, 211, 153, 0.25);
+}
+
+.admin-badge-pill.moderate {
+  background-color: rgba(197, 160, 89, 0.12);
+  color: #C5A059;
+  border: 1px solid rgba(197, 160, 89, 0.28);
+}
+
+.admin-badge-pill.hard {
+  background-color: rgba(239, 68, 68, 0.12);
+  color: #F87171;
+  border: 1px solid rgba(239, 68, 68, 0.28);
+}
+
+.admin-routes-empty {
+  padding: 4rem 2rem;
+  text-align: center;
+  background-color: #121814;
+  border: 1px dashed rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

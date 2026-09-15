@@ -9,7 +9,7 @@ export default function ThreeWays() {
       title: "COMMUNITY RUN EVENTS",
       desc: "Every full moon, run Kathmandu's outskirts with the community.",
       cta: "EXPLORE FULL MOON RUNS",
-      image: "/images/exp_community.jpg",
+      image: "/src/assets/group1.jpg",
       href: "#next-event",
     },
     {
@@ -17,7 +17,7 @@ export default function ThreeWays() {
       title: "SPECIALIZED RUNNING EVENTS",
       desc: "Custom running experiences for birthdays, celebrations and milestones.",
       cta: "PLAN YOUR EVENT",
-      image: "/images/exp_specialized.jpg",
+      image: "/src/assets/group2.jpg",
       href: "#services",
     },
     {
@@ -25,7 +25,7 @@ export default function ThreeWays() {
       title: "CURATED TRAIL RUNNING",
       desc: "Custom trail-running journeys across Nepal.",
       cta: "PLAN YOUR TRAIL TRIP",
-      image: "/images/exp_trail.jpg",
+      image: "/src/assets/nightrun2.jpg",
       href: "#services",
     },
   ];

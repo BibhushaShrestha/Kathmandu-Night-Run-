@@ -5,6 +5,7 @@ import Navbar from "../../components/admin/Navbar.jsx";
 import PageHeader from "../../components/admin/PageHeader.jsx";
 import StatCard from "../../components/admin/StatCard.jsx";
 import EventsManagement from "./EventsManagement.jsx";
+import RoutesManagement from "./RoutesManagement.jsx";
 import GalleryManagement from "./GalleryManagement.jsx";
 import "../../admin.css";
 
@@ -144,7 +145,8 @@ export default function AdminDashboard({ initialTab = "dashboard" }) {
         <main className="admin-content-body">
           {currentTab === "events" ? (
             <EventsManagement />
-          ) : currentTab === "gallery" ? (
+          ) : currentTab === "routes"? <RoutesManagement /> 
+            :currentTab === "gallery" ? (
             <GalleryManagement />
           ) : (
             <>

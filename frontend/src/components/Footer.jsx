@@ -10,7 +10,7 @@ export default function Footer({ onNavigate }) {
     { name: "Routes", path: "home", href: "#after-dark" },
     { name: "Field Notes", path: "home", href: "#field-notes" },
     { name: "Gallery", path: "home", href: "#run-with-us" },
-    { name: "Contact", path: "home", href: "#footer" },
+    { name: "Contact", path: "contact", href: "#contact-hero" },
   ];
 
   const handleClick = (e, link) => {
@@ -18,6 +18,7 @@ export default function Footer({ onNavigate }) {
     if (!onNavigate) return;
     if (link.path === "about") onNavigate("about");
     else if (link.path === "services") onNavigate("services");
+    else if (link.path === "contact") onNavigate("contact");
     else onNavigate("home", link.href);
   };
 

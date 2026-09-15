@@ -4,6 +4,7 @@ import HomePage from "./pages/public/Home.jsx";
 import AboutPage from "./pages/public/About.jsx";
 import ServicesPage from "./pages/public/Services.jsx";
 import EventsPage from "./pages/public/Events.jsx";
+import ContactPage from "./pages/public/Contact.jsx";
 import AdminLogin from "./pages/admin/AdminLogin.jsx";
 import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
 
@@ -22,6 +23,8 @@ function PublicShell() {
         setCurrentPath("services");
       } else if (hash.includes("events-hero")) {
         setCurrentPath("events");
+      } else if (hash.includes("contact-hero")) {
+        setCurrentPath("contact");
       } else if (hash === "#home" || hash === "#hero" || hash === "") {
         setCurrentPath("home");
       }
@@ -53,6 +56,8 @@ function PublicShell() {
         window.location.hash = "services-hero";
       } else if (targetPath === "events") {
         window.location.hash = "events-hero";
+      } else if (targetPath === "contact") {
+        window.location.hash = "contact-hero";
       } else if (targetHash) {
         window.location.hash = targetHash.replace("#", "");
       } else {
@@ -81,6 +86,8 @@ function PublicShell() {
         <ServicesPage onNavigate={handleNavigate} />
       ) : currentPath === "events" ? (
         <EventsPage onNavigate={handleNavigate} />
+      ) : currentPath === "contact" ? (
+        <ContactPage onNavigate={handleNavigate} />
       ) : (
         <HomePage onNavigate={handleNavigate} />
       )}
@@ -96,6 +103,7 @@ function App() {
       <Route path="/admin/login" element={<AdminLogin />} />
       <Route path="/admin/dashboard" element={<AdminDashboard />} />
       <Route path="/admin/events" element={<AdminDashboard initialTab="events" />} />
+      <Route path="/admin/routes" element={<AdminDashboard initialTab="routes" />} />
       <Route path="/admin/gallery" element={<AdminDashboard initialTab="gallery" />} />
 
       {/* Public Routes — catch-all for existing hash-based navigation */}
