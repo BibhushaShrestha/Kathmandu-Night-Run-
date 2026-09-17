@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { adminAuthService } from "../../services/api";
 import "../../admin.css";
 
 export default function AdminLogin() {
@@ -11,20 +12,24 @@ export default function AdminLogin() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    setIsLoading(true);
 
-    // Simulate login — replace with real API call later
-    setTimeout(() => {
-      if (email && password) {
-        navigate("/admin/dashboard");
-      } else {
-        setError("Please enter both email and password.");
-        setIsLoading(false);
-      }
-    }, 800);
+    if (!email || !password) {
+      setError("Please enter both email and password.");
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      await adminAuthService.login(email, password);
+      navigate("/admin/dashboard");
+    } catch (err) {
+      setError(err.message || "Login failed. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

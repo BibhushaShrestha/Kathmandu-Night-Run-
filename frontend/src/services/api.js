@@ -31,35 +31,18 @@ export async function apiFetch(endpoint, options = {}) {
   }
 }
 
+// ---------- AUTH ----------
 export const adminAuthService = {
   login: async (email, password) => {
-    // Simulated authentication check (fallback)
-    if (email === 'admin@kathmandunightrun.com' && password === 'admin123') {
-      const mockToken = 'mock_jwt_token_knr_2026';
-      const mockUser = {
-        name: 'Bibhusha Shrestha',
-        role: 'Administrator',
-        email,
-      };
-      localStorage.setItem('admin_token', mockToken);
-      localStorage.setItem('admin_user', JSON.stringify(mockUser));
-      return { token: mockToken, user: mockUser };
+    const res = await apiFetch('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({ email, password }),
+    });
+    if (res.token) {
+      localStorage.setItem('admin_token', res.token);
+      localStorage.setItem('admin_user', JSON.stringify(res.user));
     }
-
-    // Attempt real API fetch
-    try {
-      const res = await apiFetch('/auth/login', {
-        method: 'POST',
-        body: JSON.stringify({ email, password }),
-      });
-      if (res.token) {
-        localStorage.setItem('admin_token', res.token);
-        localStorage.setItem('admin_user', JSON.stringify(res.user));
-      }
-      return res;
-    } catch (err) {
-      throw err;
-    }
+    return res;
   },
 
   logout: () => {
@@ -67,13 +50,40 @@ export const adminAuthService = {
     localStorage.removeItem('admin_user');
   },
 
+  isLoggedIn: () => !!localStorage.getItem('admin_token'),
+
   getCurrentUser: () => {
     const userStr = localStorage.getItem('admin_user');
-    if (!userStr) return { name: 'Bibhusha Shrestha', role: 'Administrator' };
+    if (!userStr) return null;
     try {
       return JSON.parse(userStr);
     } catch {
-      return { name: 'Bibhusha Shrestha', role: 'Administrator' };
+      return null;
     }
   },
+};
+
+// ---------- EVENTS ----------
+export const eventService = {
+  getAll: () => apiFetch('/events'),
+  getById: (id) => apiFetch(`/events/${id}`),
+  create: (data) => apiFetch('/events', { method: 'POST', body: JSON.stringify(data) }),
+  update: (id, data) => apiFetch(`/events/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  remove: (id) => apiFetch(`/events/${id}`, { method: 'DELETE' }),
+};
+
+// ---------- GALLERY ----------
+export const galleryService = {
+  getAll: () => apiFetch('/gallery'),
+  create: (data) => apiFetch('/gallery', { method: 'POST', body: JSON.stringify(data) }),
+  update: (id, data) => apiFetch(`/gallery/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  remove: (id) => apiFetch(`/gallery/${id}`, { method: 'DELETE' }),
+};
+
+// ---------- ROUTES ----------
+export const routeService = {
+  getAll: () => apiFetch('/routes'),
+  create: (data) => apiFetch('/routes', { method: 'POST', body: JSON.stringify(data) }),
+  update: (id, data) => apiFetch(`/routes/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  remove: (id) => apiFetch(`/routes/${id}`, { method: 'DELETE' }),
 };

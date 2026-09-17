@@ -1,49 +1,29 @@
 import React, { useState, useRef, useEffect } from "react";
+import { eventService } from "../../services/api";
 
 export default function EventsManagement() {
-  // Sample initial events matching the design screenshot
-  const [events, setEvents] = useState([
-    {
-      id: 1,
-      title: "Full Moon Run",
-      date: "2026-09-18",
-      time: "19:30",
-      location: "Boudhanath Stupa",
-      distance: "10 km",
-      status: "published",
-      thumb: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=140&q=80"
-    },
-    {
-      id: 2,
-      title: "Shivapuri Night Trail",
-      date: "2026-09-27",
-      time: "18:45",
-      location: "Shivapuri National Park",
-      distance: "18 km",
-      status: "upcoming",
-      thumb: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=140&q=80"
-    },
-    {
-      id: 3,
-      title: "Kathmandu Heritage Run",
-      date: "2026-10-05",
-      time: "20:00",
-      location: "Patan Durbar Square",
-      distance: "8 km",
-      status: "draft",
-      thumb: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=140&q=80"
-    },
-    {
-      id: 4,
-      title: "Valley Night Run",
-      date: "2026-08-14",
-      time: "19:00",
-      location: "Chobhar Gorge",
-      distance: "14 km",
-      status: "completed",
-      thumb: "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=140&q=80"
-    }
-  ]);
+  // Backend bata aaune real events - suru ma khali array
+  const [events, setEvents] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
+
+  // Component mount huda backend bata events tanne
+  useEffect(() => {
+    const loadEvents = async () => {
+      try {
+        setIsLoading(true);
+        const data = await eventService.getAll();
+        // MongoDB le "_id" pathaucha, tara UI ma "id" use bhako cha - map garne
+        setEvents(data.map((ev) => ({ ...ev, id: ev._id })));
+        setLoadError("");
+      } catch (err) {
+        setLoadError(err.message || "Failed to load events");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    loadEvents();
+  }, []);
 
   // Filters state
   const [searchQuery, setSearchQuery] = useState("");
@@ -136,25 +116,30 @@ export default function EventsManagement() {
   });
 
   // Toggle publish / unpublish status
-  const handleTogglePublish = (id) => {
-    setEvents((prev) =>
-      prev.map((ev) => {
-        if (ev.id === id) {
-          const isPublishedOrUpcoming = ev.status === "published" || ev.status === "upcoming";
-          return {
-            ...ev,
-            status: isPublishedOrUpcoming ? "draft" : "published"
-          };
-        }
-        return ev;
-      })
-    );
+  const handleTogglePublish = async (id) => {
+    const target = events.find((ev) => ev.id === id);
+    if (!target) return;
+    const isPublishedOrUpcoming = target.status === "published" || target.status === "upcoming";
+    const newStatus = isPublishedOrUpcoming ? "draft" : "published";
+
+    try {
+      const updated = await eventService.update(id, { status: newStatus });
+      setEvents((prev) =>
+        prev.map((ev) => (ev.id === id ? { ...updated, id: updated._id } : ev))
+      );
+    } catch (err) {
+      alert(err.message || "Failed to update status");
+    }
   };
 
   // Delete event
-  const handleDeleteEvent = (id) => {
-    if (window.confirm("Are you sure you want to delete this event?")) {
+  const handleDeleteEvent = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this event?")) return;
+    try {
+      await eventService.remove(id);
       setEvents((prev) => prev.filter((ev) => ev.id !== id));
+    } catch (err) {
+      alert(err.message || "Failed to delete event");
     }
   };
 
@@ -205,8 +190,8 @@ export default function EventsManagement() {
     setIsAddModalOpen(true);
   };
 
-  // Save Event (Add or Edit)
-  const handleSaveEvent = (e) => {
+  // Save Event (Add or Edit) - backend sanga sync garne
+  const handleSaveEvent = async (e) => {
     e.preventDefault();
     const eventTitle = formData.title.trim() || "Full Moon Run";
     const eventDate = formData.date || "2026-09-18";
@@ -215,42 +200,36 @@ export default function EventsManagement() {
     const eventDistance = formData.distance.trim() || "10 km";
     const eventStatus = (formData.status || "Draft").toLowerCase();
 
-    if (editingEvent) {
-      setEvents((prev) =>
-        prev.map((item) =>
-          item.id === editingEvent.id
-            ? {
-                ...item,
-                ...formData,
-                title: eventTitle,
-                date: eventDate,
-                time: eventTime,
-                location: eventLocation,
-                distance: eventDistance,
-                status: eventStatus
-              }
-            : item
-        )
-      );
-    } else {
-      const newEvent = {
-        id: Date.now(),
-        ...formData,
-        title: eventTitle,
-        date: eventDate,
-        time: eventTime,
-        location: eventLocation,
-        distance: eventDistance,
-        status: eventStatus,
-        thumb:
-          formData.thumb ||
-          "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=140&q=80"
-      };
-      setEvents((prev) => [newEvent, ...prev]);
-    }
+    const payload = {
+      ...formData,
+      title: eventTitle,
+      date: eventDate,
+      time: eventTime,
+      location: eventLocation,
+      distance: eventDistance,
+      status: eventStatus,
+      thumb:
+        formData.thumb ||
+        "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=140&q=80"
+    };
 
-    setIsAddModalOpen(false);
-    setEditingEvent(null);
+    try {
+      if (editingEvent) {
+        const updated = await eventService.update(editingEvent.id, payload);
+        setEvents((prev) =>
+          prev.map((item) =>
+            item.id === editingEvent.id ? { ...updated, id: updated._id } : item
+          )
+        );
+      } else {
+        const created = await eventService.create(payload);
+        setEvents((prev) => [{ ...created, id: created._id }, ...prev]);
+      }
+      setIsAddModalOpen(false);
+      setEditingEvent(null);
+    } catch (err) {
+      alert(err.message || "Failed to save event");
+    }
   };
 
   const currentStatusLabel =
