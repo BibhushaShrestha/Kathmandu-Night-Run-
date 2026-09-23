@@ -1,68 +1,32 @@
 import React, { useState, useRef, useEffect } from "react";
-
-// Import images from assets directory
-import group1 from "../../assets/group1.jpg";
-import group2 from "../../assets/group2.jpg";
-import group3 from "../../assets/group3.jpg";
-import group4 from "../../assets/group4.jpg";
-
-import nightRun from "../../assets/night_run.jpg";
-import image from "../../assets/image.jpg";
+import { galleryService } from "../../services/api";
 
 export default function GalleryManagement() {
-  // Initial gallery items matching the screenshot
-  const initialItems = [
-    {
-      id: 1,
-      title: "Start line at Chobhar",
-      event: "Valley Night Run",
-      date: "2026-08-14",
-      src: group1,
-      fallback: "/images/exp_community.jpg"
-    },
-    {
-      id: 2,
-      title: "Moonrise over Boudha",
-      event: "Full Moon Run",
-      date: "2026-07-21",
-      src: group3,
-      fallback: "/images/full_moon.jpg"
-    },
-    {
-      id: 3,
-      title: "Headlamps in the forest",
-      event: "Shivapuri Night Trail",
-      date: "2026-06-28",
-      src: nightRun,
-      fallback: "/images/exp_trail.jpg"
-    },
-    {
-      id: 4,
-      title: "Patan courtyard finish",
-      event: "Kathmandu Heritage Run",
-      date: "2026-06-02",
-      src: group2,
-      fallback: "/images/our_story.jpg"
-    },
-    {
-      id: 5,
-      title: "Ridge line at dusk",
-      event: "Valley Night Run",
-      date: "2026-05-18",
-      src: group4,
-      fallback: "/images/exp_specialized.jpg"
-    },
-    {
-      id: 6,
-      title: "Steps repeats",
-      event: "Full Moon Run",
-      date: "2026-05-04",
-      src: image,
-      fallback: "/images/full_moon.jpg"
-    }
-  ];
+  // Backend bata aaune real gallery items - suru ma khali array
+  const [galleryItems, setGalleryItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
 
-  const [galleryItems, setGalleryItems] = useState(initialItems);
+  // Component mount huda backend bata gallery tanne
+  useEffect(() => {
+    const loadGallery = async () => {
+      try {
+        setIsLoading(true);
+        const data = await galleryService.getAll();
+        // MongoDB le "_id" ra "imageUrl" pathaucha, UI ma "id" ra "src" chahincha
+        setGalleryItems(
+          data.map((item) => ({ ...item, id: item._id, src: item.imageUrl }))
+        );
+        setLoadError("");
+      } catch (err) {
+        setLoadError(err.message || "Failed to load gallery");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    loadGallery();
+  }, []);
+
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedEvent, setSelectedEvent] = useState("all");
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -138,34 +102,44 @@ export default function GalleryManagement() {
     }
   };
 
-  const handleUploadSubmit = (e) => {
+  const handleUploadSubmit = async (e) => {
     e.preventDefault();
     if (!uploadForm.preview && !uploadForm.title.trim()) return;
 
-    const newItem = {
-      id: Date.now(),
+    const payload = {
       title: uploadForm.title.trim() || "Night Run Moment",
       event: uploadForm.event,
       date: uploadForm.date || new Date().toISOString().split("T")[0],
-      src: uploadForm.preview || "/images/hero.jpg",
-      fallback: "/images/hero.jpg"
+      imageUrl: uploadForm.preview || "/images/hero.jpg"
     };
 
-    setGalleryItems((prev) => [newItem, ...prev]);
-    setIsUploadModalOpen(false);
-    setUploadForm({
-      title: "",
-      event: "Full Moon Run",
-      date: new Date().toISOString().split("T")[0],
-      preview: ""
-    });
+    try {
+      const created = await galleryService.create(payload);
+      setGalleryItems((prev) => [
+        { ...created, id: created._id, src: created.imageUrl },
+        ...prev
+      ]);
+      setIsUploadModalOpen(false);
+      setUploadForm({
+        title: "",
+        event: "Full Moon Run",
+        date: new Date().toISOString().split("T")[0],
+        preview: ""
+      });
+    } catch (err) {
+      alert(err.message || "Failed to upload image");
+    }
   };
 
   // Delete item
-  const handleDeleteItem = (id, e) => {
+  const handleDeleteItem = async (id, e) => {
     e.stopPropagation();
-    if (window.confirm("Are you sure you want to remove this image from the gallery?")) {
+    if (!window.confirm("Are you sure you want to remove this image from the gallery?")) return;
+    try {
+      await galleryService.remove(id);
       setGalleryItems((prev) => prev.filter((item) => item.id !== id));
+    } catch (err) {
+      alert(err.message || "Failed to delete image");
     }
   };
 
@@ -192,26 +166,31 @@ export default function GalleryManagement() {
     }
   };
 
-  // Save the edited item back into the gallery list
-  const handleEditSubmit = (e) => {
+  // Save the edited item back into the gallery list - backend sanga sync garne
+  const handleEditSubmit = async (e) => {
     e.preventDefault();
     if (!editingItem) return;
 
-    setGalleryItems((prev) =>
-      prev.map((item) =>
-        item.id === editingItem.id
-          ? {
-              ...item,
-              title: editForm.caption.trim() || item.title,
-              event: editForm.event,
-              date: editForm.date || item.date,
-              src: editForm.src || item.src
-            }
-          : item
-      )
-    );
+    const payload = {
+      title: editForm.caption.trim() || editingItem.title,
+      event: editForm.event,
+      date: editForm.date || editingItem.date,
+      imageUrl: editForm.src || editingItem.src
+    };
 
-    setEditingItem(null);
+    try {
+      const updated = await galleryService.update(editingItem.id, payload);
+      setGalleryItems((prev) =>
+        prev.map((item) =>
+          item.id === editingItem.id
+            ? { ...updated, id: updated._id, src: updated.imageUrl }
+            : item
+        )
+      );
+      setEditingItem(null);
+    } catch (err) {
+      alert(err.message || "Failed to update image");
+    }
   };
 
   const currentEventLabel =
@@ -313,9 +292,17 @@ export default function GalleryManagement() {
         </div>
       </div>
 
+      {/* Loading / Error States */}
+      {isLoading && (
+        <p style={{ color: "#8A988E", fontSize: "0.875rem" }}>Loading gallery…</p>
+      )}
+      {!isLoading && loadError && (
+        <p style={{ color: "#FF6B6B", fontSize: "0.875rem" }}>{loadError}</p>
+      )}
+
       {/* Gallery Cards Grid */}
       <div className="admin-gallery-grid">
-        {filteredItems.length > 0 ? (
+        {!isLoading && !loadError && filteredItems.length > 0 ? (
           filteredItems.map((item) => (
             <div
               key={item.id}

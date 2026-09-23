@@ -7,6 +7,7 @@ import StatCard from "../../components/admin/StatCard.jsx";
 import EventsManagement from "./EventsManagement.jsx";
 import RoutesManagement from "./RoutesManagement.jsx";
 import GalleryManagement from "./GalleryManagement.jsx";
+import { adminAuthService } from "../../services/api";
 import "../../admin.css";
 
 export default function AdminDashboard({ initialTab = "dashboard" }) {
@@ -15,6 +16,7 @@ export default function AdminDashboard({ initialTab = "dashboard" }) {
   const [currentTab, setCurrentTab] = useState(initialTab);
 
   const handleLogout = () => {
+    adminAuthService.logout();
     navigate("/admin/login");
   };
 

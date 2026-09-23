@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
 import HomePage from "./pages/public/Home.jsx";
 import AboutPage from "./pages/public/About.jsx";
 import ServicesPage from "./pages/public/Services.jsx";
@@ -7,6 +7,15 @@ import EventsPage from "./pages/public/Events.jsx";
 import ContactPage from "./pages/public/Contact.jsx";
 import AdminLogin from "./pages/admin/AdminLogin.jsx";
 import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
+import { adminAuthService } from "./services/api";
+
+/* ─── Guard: token nabhaye /admin/login ma pathaune ─── */
+function ProtectedRoute({ children }) {
+  if (!adminAuthService.isLoggedIn()) {
+    return <Navigate to="/admin/login" replace />;
+  }
+  return children;
+}
 
 /* ─── Public Site Shell ─── */
 function PublicShell() {
@@ -101,10 +110,38 @@ function App() {
     <Routes>
       {/* Admin Routes */}
       <Route path="/admin/login" element={<AdminLogin />} />
-      <Route path="/admin/dashboard" element={<AdminDashboard />} />
-      <Route path="/admin/events" element={<AdminDashboard initialTab="events" />} />
-      <Route path="/admin/routes" element={<AdminDashboard initialTab="routes" />} />
-      <Route path="/admin/gallery" element={<AdminDashboard initialTab="gallery" />} />
+      <Route
+        path="/admin/dashboard"
+        element={
+          <ProtectedRoute>
+            <AdminDashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/events"
+        element={
+          <ProtectedRoute>
+            <AdminDashboard initialTab="events" />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/routes"
+        element={
+          <ProtectedRoute>
+            <AdminDashboard initialTab="routes" />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/gallery"
+        element={
+          <ProtectedRoute>
+            <AdminDashboard initialTab="gallery" />
+          </ProtectedRoute>
+        }
+      />
 
       {/* Public Routes — catch-all for existing hash-based navigation */}
       <Route path="*" element={<PublicShell />} />

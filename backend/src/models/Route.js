@@ -10,10 +10,9 @@ const routeSchema = new mongoose.Schema(
       enum: ["Easy", "Moderate", "Hard"],
       default: "Moderate",
     },
-    startPoint: { type: String },
-    endPoint: { type: String },
+    location: { type: String }, // e.g. "Teku to Sankhamul"
     description: { type: String },
-    mapImage: { type: String },
+    image: { type: String }, // route/map photo, base64 or URL
     status: {
       type: String,
       enum: ["active", "inactive"],

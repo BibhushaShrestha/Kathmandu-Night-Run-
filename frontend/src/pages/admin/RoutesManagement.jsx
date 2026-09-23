@@ -1,55 +1,29 @@
 import React, { useState, useRef, useEffect } from "react";
-
-// Route thumbnail images from assets
-import group1 from "../../assets/group1.jpg";
-import nightrun2 from "../../assets/nightrun2.jpg";
-import kathmanduValley from "../../assets/kathmandu_valley.jpg";
-import view from "../../assets/view.jpg";
+import { routeService } from "../../services/api";
 
 export default function RoutesManagement() {
-  // Initial routes matching the screenshot
-  const [routes, setRoutes] = useState([
-    {
-      id: 1,
-      name: "Bagmati Riverside",
-      location: "Teku to Sankhamul",
-      description: "Flat, well-lit corridor. Great for first-timers and recovery nights.",
-      distance: "9 km",
-      elevation: "80 m",
-      difficulty: "Easy",
-      image: group1
-    },
-    {
-      id: 2,
-      name: "Godavari Dark Trail",
-      location: "Phulchowki base",
-      description: "The valley's toughest night line. Support vehicle recommended.",
-      distance: "21 km",
-      elevation: "1100 m",
-      difficulty: "Hard",
-      image: nightrun2
-    },
-    {
-      id: 3,
-      name: "Nagarjun Ridge Loop",
-      location: "Nagarjun Forest Reserve",
-      description: "Steady forest climb to the viewpoint, fast descent on fire road.",
-      distance: "16 km",
-      elevation: "760 m",
-      difficulty: "Hard",
-      image: kathmanduValley
-    },
-    {
-      id: 4,
-      name: "Swayambhu Steps",
-      location: "Swayambhunath",
-      description: "365 steps repeats with prayer flags and city lights below.",
-      distance: "7 km",
-      elevation: "310 m",
-      difficulty: "Moderate",
-      image: view
-    }
-  ]);
+  // Backend bata aaune real routes - suru ma khali array
+  const [routes, setRoutes] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
+
+  // Component mount huda backend bata routes tanne
+  useEffect(() => {
+    const loadRoutes = async () => {
+      try {
+        setIsLoading(true);
+        const data = await routeService.getAll();
+        // MongoDB le "_id" pathaucha, tara UI ma "id" use bhako cha - map garne
+        setRoutes(data.map((r) => ({ ...r, id: r._id })));
+        setLoadError("");
+      } catch (err) {
+        setLoadError(err.message || "Failed to load routes");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    loadRoutes();
+  }, []);
 
   // Filters
   const [searchQuery, setSearchQuery] = useState("");
@@ -170,8 +144,8 @@ export default function RoutesManagement() {
     setIsModalOpen(true);
   };
 
-  // Save (Add or Edit) route
-  const handleSaveRoute = (e) => {
+  // Save (Add or Edit) route - backend sanga sync garne
+  const handleSaveRoute = async (e) => {
     e.preventDefault();
 
     const routeData = {
@@ -184,22 +158,31 @@ export default function RoutesManagement() {
       image: formData.image
     };
 
-    if (editingRoute) {
-      setRoutes((prev) =>
-        prev.map((r) => (r.id === editingRoute.id ? { ...r, ...routeData } : r))
-      );
-    } else {
-      setRoutes((prev) => [{ id: Date.now(), ...routeData }, ...prev]);
+    try {
+      if (editingRoute) {
+        const updated = await routeService.update(editingRoute.id, routeData);
+        setRoutes((prev) =>
+          prev.map((r) => (r.id === editingRoute.id ? { ...updated, id: updated._id } : r))
+        );
+      } else {
+        const created = await routeService.create(routeData);
+        setRoutes((prev) => [{ ...created, id: created._id }, ...prev]);
+      }
+      setIsModalOpen(false);
+      setEditingRoute(null);
+    } catch (err) {
+      alert(err.message || "Failed to save route");
     }
-
-    setIsModalOpen(false);
-    setEditingRoute(null);
   };
 
   // Delete route
-  const handleDeleteRoute = (id) => {
-    if (window.confirm("Are you sure you want to delete this route?")) {
+  const handleDeleteRoute = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this route?")) return;
+    try {
+      await routeService.remove(id);
       setRoutes((prev) => prev.filter((r) => r.id !== id));
+    } catch (err) {
+      alert(err.message || "Failed to delete route");
     }
   };
 
@@ -344,8 +327,20 @@ export default function RoutesManagement() {
         </div>
       </div>
 
+      {/* Loading / Error States */}
+      {isLoading && (
+        <div className="admin-routes-empty">
+          <p style={{ color: "#8A988E", fontSize: "0.875rem" }}>Loading routes…</p>
+        </div>
+      )}
+      {!isLoading && loadError && (
+        <div className="admin-routes-empty">
+          <p style={{ color: "#FF6B6B", fontSize: "0.875rem" }}>{loadError}</p>
+        </div>
+      )}
+
       {/* Routes Card Grid */}
-      {visibleRoutes.length > 0 ? (
+      {!isLoading && !loadError && visibleRoutes.length > 0 ? (
         <div className="admin-routes-grid">
           {visibleRoutes.map((route) => (
             <div key={route.id} className="admin-route-card">
@@ -411,7 +406,7 @@ export default function RoutesManagement() {
             </div>
           ))}
         </div>
-      ) : (
+      ) : !isLoading && !loadError ? (
         <div className="admin-routes-empty">
           <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#5C6B61" strokeWidth="1.5">
             <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
@@ -433,7 +428,7 @@ export default function RoutesManagement() {
             Reset Filters
           </button>
         </div>
-      )}
+      ) : null}
 
       {/* Add / Edit Route Modal */}
       {isModalOpen && (
