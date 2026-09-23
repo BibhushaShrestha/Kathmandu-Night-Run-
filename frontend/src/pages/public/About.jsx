@@ -107,7 +107,7 @@ export default function AboutPage({ onNavigate }) {
             <ScrollReveal variant="fade-up" delay={400}>
               <div className="story-body">
                 <p>
-                  Kathmandu Night Run began with four friends who wanted to see their own city without the traffic, the crowds and the noise in the way. The first runs had no route and no plan — just a few torches and a direction.
+                  Off Route began with four friends who wanted to see their own city without the traffic, the crowds and the noise in the way. The first runs had no route and no plan — just a few torches and a direction.
                 </p>
                 <p>
                   What they found was a different Kathmandu. Temple squares standing empty. Streets you could hear your own footsteps on. Trails at the edge of the valley that felt a long way from the city they had just left.

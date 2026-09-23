@@ -35,8 +35,8 @@ export default function Footer({ onNavigate }) {
             EXPERIENCE KATHMANDU AFTER DARK.
           </p>
           <div style={{ marginTop: "2rem", display: "flex", flexDirection: "column", gap: "0.5rem", color: "rgba(255,255,255,0.7)", fontSize: "0.875rem" }}>
-            <p>@kathmandunightrun</p>
-            <p>hello@kathmandunightrun.com</p>
+            <p>@Off Route</p>
+            <p>hello@Off Route.com</p>
             <p>Kathmandu, Nepal</p>
           </div>
         </div>
@@ -65,7 +65,7 @@ export default function Footer({ onNavigate }) {
       </div>
 
       <div className="container-max" style={{ paddingTop: "2rem", borderTop: "1px solid rgba(255,255,255,0.1)", display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem", color: "rgba(255,255,255,0.4)", fontSize: "0.75rem" }}>
-        <span>© {new Date().getFullYear()} Kathmandu Night Run. All rights reserved.</span>
+        <span>© {new Date().getFullYear()} Off Route. All rights reserved.</span>
         <div style={{ display: "flex", gap: "1.5rem" }}>
           <a href="#privacy" style={{ color: "inherit", textDecoration: "none" }}>Privacy Policy</a>
           <a href="#terms" style={{ color: "inherit", textDecoration: "none" }}>Terms of Service</a>
