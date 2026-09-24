@@ -4,6 +4,7 @@ import HomePage from "./pages/public/Home.jsx";
 import AboutPage from "./pages/public/About.jsx";
 import ServicesPage from "./pages/public/Services.jsx";
 import EventsPage from "./pages/public/Events.jsx";
+import FieldNotesPage from "./pages/public/FieldNotes.jsx";
 import ContactPage from "./pages/public/Contact.jsx";
 import AdminLogin from "./pages/admin/AdminLogin.jsx";
 import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
@@ -32,8 +33,10 @@ function PublicShell() {
         setCurrentPath("services");
       } else if (hash.includes("events-hero")) {
         setCurrentPath("events");
-      } else if (hash.includes("contact-hero")) {
+     } else if (hash.includes("contact-hero")) {
         setCurrentPath("contact");
+      } else if (hash.includes("fieldnotes-hero")) {
+        setCurrentPath("fieldnotes");
       } else if (hash === "#home" || hash === "#hero" || hash === "") {
         setCurrentPath("home");
       }
@@ -67,6 +70,8 @@ function PublicShell() {
         window.location.hash = "events-hero";
       } else if (targetPath === "contact") {
         window.location.hash = "contact-hero";
+      } else if (targetPath === "fieldnotes") {
+        window.location.hash = "fieldnotes-hero";
       } else if (targetHash) {
         window.location.hash = targetHash.replace("#", "");
       } else {
@@ -97,6 +102,8 @@ function PublicShell() {
         <EventsPage onNavigate={handleNavigate} />
       ) : currentPath === "contact" ? (
         <ContactPage onNavigate={handleNavigate} />
+      ) : currentPath === "fieldnotes" ? (
+        <FieldNotesPage onNavigate={handleNavigate} />
       ) : (
         <HomePage onNavigate={handleNavigate} />
       )}

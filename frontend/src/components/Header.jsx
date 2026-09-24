@@ -29,7 +29,7 @@ export default function Header({ currentPath = "home", onNavigate }) {
     { name: "SERVICES", path: "services", href: "#services-hero" },
     { name: "EVENTS", path: "events", href: "#events-hero" },
     { name: "ROUTES", path: "home", href: "#after-dark" },
-    { name: "FIELD NOTES", path: "home", href: "#field-notes" },
+    { name: "FIELD NOTES", path: "fieldnotes", href: "#fieldnotes-hero" },
     { name: "GALLERY", path: "home", href: "#run-with-us" },
     { name: "CONTACT", path: "contact", href: "#contact-hero" },
   ];
@@ -46,6 +46,8 @@ export default function Header({ currentPath = "home", onNavigate }) {
         onNavigate("events");
       } else if (link.name === "CONTACT") {
         onNavigate("contact");
+      } else if (link.name === "FIELD NOTES") {
+        onNavigate("fieldnotes");
       } else if (link.name === "HOME") {
         onNavigate("home");
       } else {
