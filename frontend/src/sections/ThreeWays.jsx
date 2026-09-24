@@ -19,7 +19,7 @@ export default function ThreeWays() {
       title: "SPECIALIZED RUNNING EVENTS",
       desc: "Custom running experiences for birthdays, celebrations and milestones.",
       cta: "PLAN YOUR EVENT",
-      image: group2.jpg,
+      image: group2,
       href: "#services",
     },
     {
@@ -27,7 +27,7 @@ export default function ThreeWays() {
       title: "CURATED TRAIL RUNNING",
       desc: "Custom trail-running journeys across Nepal.",
       cta: "PLAN YOUR TRAIL TRIP",
-      image: nightrun2.jpg,
+      image: nightrun2,
       href: "#services",
     },
   ];
