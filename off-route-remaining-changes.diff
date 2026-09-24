@@ -1,0 +1,316 @@
+diff --git a/backend/src/server.js b/backend/src/server.js
+index 5a0918f..16877da 100644
+--- a/backend/src/server.js
++++ b/backend/src/server.js
+@@ -32,7 +32,7 @@ app.use("/api/", limiter);
+ 
+ // --- Routes ---
+ app.get("/", (req, res) => {
+-  res.json({ message: "Kathmandu Night Run API is running" });
++  res.json({ message: "Off Route API is running" });
+ });
+ 
+ app.use("/api/auth", authRoutes);
+diff --git a/backend/src/utils/seedAdmin.js b/backend/src/utils/seedAdmin.js
+index e0678d1..2d2fb26 100644
+--- a/backend/src/utils/seedAdmin.js
++++ b/backend/src/utils/seedAdmin.js
+@@ -11,7 +11,7 @@ dotenv.config();
+ const run = async () => {
+   await mongoose.connect(process.env.MONGO_URI);
+ 
+-  const existing = await Admin.findOne({ email: "admin@kathmandunightrun.com" });
++  const existing = await Admin.findOne({ email: "admin@offroute.com" });
+   if (existing) {
+     console.log("Admin already exists, seed nagarikan.");
+     process.exit(0);
+@@ -21,7 +21,7 @@ const run = async () => {
+ 
+   await Admin.create({
+     name: "Bibhusha Shrestha",
+-    email: "admin@kathmandunightrun.com",
++    email: "admin@offroute.com",
+     password: hashedPassword,
+     role: "Administrator",
+   });
+diff --git a/frontend/index.html b/frontend/index.html
+index ea318a6..c7031af 100644
+--- a/frontend/index.html
++++ b/frontend/index.html
+@@ -2,9 +2,9 @@
+ <html lang="en">
+   <head>
+     <meta charset="UTF-8" />
+-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
++    <link rel="icon" type="image/png" href="/favicon.png" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <title>Kathmandu Night Run — Experience Kathmandu After Dark</title>
++    <title>Off Route — Experience Kathmandu After Dark</title>
+     <meta name="description" content="Experience Kathmandu differently through full moon runs, unforgettable events and trail-running journeys across Nepal." />
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+diff --git a/frontend/src/admin.css b/frontend/src/admin.css
+index c1ea8c5..d59e768 100644
+--- a/frontend/src/admin.css
++++ b/frontend/src/admin.css
+@@ -1,5 +1,5 @@
+ /* ==========================================================================
+-   KATHMANDU NIGHT RUN — Pure Vanilla CSS Admin System Stylesheet
++   OFF ROUTE — Pure Vanilla CSS Admin System Stylesheet
+    ========================================================================== */
+ 
+ /* --- Admin Theme Variables --- */
+@@ -63,35 +63,10 @@
+   margin-bottom: 2rem;
+ }
+ 
+-.admin-logo-icon {
+-  width: 36px;
+-  height: 36px;
+-  background-color: var(--admin-active-bg);
+-  border: 1px solid var(--admin-active-border);
+-  border-radius: 8px;
+-  display: flex;
+-  align-items: center;
+-  justify-content: center;
+-  color: var(--admin-gold);
+-}
+-
+-.admin-logo-text-top {
+-  font-family: var(--font-display);
+-  font-size: 1.125rem;
+-  font-weight: 900;
+-  letter-spacing: 0.05em;
+-  color: #ffffff;
+-  line-height: 1;
+-}
+-
+-.admin-logo-text-bottom {
+-  font-family: var(--font-display);
+-  font-size: 1.125rem;
+-  font-weight: 900;
+-  letter-spacing: 0.05em;
+-  color: var(--admin-gold);
+-  line-height: 1;
+-  margin-top: -2px;
++.admin-logo-img {
++  height: 2.25rem;
++  width: auto;
++  display: block;
+ }
+ 
+ .admin-nav-list {
+diff --git a/frontend/src/components/Header.jsx b/frontend/src/components/Header.jsx
+index b383449..450f7fa 100644
+--- a/frontend/src/components/Header.jsx
++++ b/frontend/src/components/Header.jsx
+@@ -1,4 +1,5 @@
+ import React, { useState, useEffect } from "react";
++import logo from "../assets/off-route-logo-white.png";
+ 
+ export default function Header({ currentPath = "home", onNavigate }) {
+   const [open, setOpen] = useState(false);
+@@ -71,8 +72,7 @@ export default function Header({ currentPath = "home", onNavigate }) {
+           }
+           className="header-logo"
+         >
+-          <div className="header-logo-top">KATHMANDU</div>
+-          <div className="header-logo-bottom">NIGHT RUN</div>
++          <img src={logo} alt="Off Route" className="header-logo-img" />
+         </a>
+ 
+         {/* Desktop Navigation */}
+diff --git a/frontend/src/components/admin/Sidebar.jsx b/frontend/src/components/admin/Sidebar.jsx
+index ebe83dc..97da2d3 100644
+--- a/frontend/src/components/admin/Sidebar.jsx
++++ b/frontend/src/components/admin/Sidebar.jsx
+@@ -1,4 +1,5 @@
+ import React from "react";
++import logo from "../../assets/off-route-logo-white.png";
+ 
+ export default function Sidebar({ currentTab = "dashboard", onTabChange, onLogout, mobileOpen, onMobileClose }) {
+   const menuItems = [
+@@ -67,15 +68,7 @@ export default function Sidebar({ currentTab = "dashboard", onTabChange, onLogou
+       <div>
+         {/* Brand Logo Box */}
+         <div className="admin-logo-box">
+-          <div className="admin-logo-icon">
+-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+-            </svg>
+-          </div>
+-          <div>
+-            <div className="admin-logo-text-top">KATHMANDU</div>
+-            <div className="admin-logo-text-bottom">NIGHT RUN</div>
+-          </div>
++          <img src={logo} alt="Off Route" className="admin-logo-img" />
+         </div>
+ 
+         {/* Navigation Menu Links */}
+diff --git a/frontend/src/index.css b/frontend/src/index.css
+index 8d5959b..aecca49 100644
+--- a/frontend/src/index.css
++++ b/frontend/src/index.css
+@@ -1,5 +1,5 @@
+ /* ==========================================================================
+-   KATHMANDU NIGHT RUN — Pure Vanilla CSS Design System & Theme Styles
++   OFF ROUTE — Pure Vanilla CSS Design System & Theme Styles
+    ========================================================================== */
+ 
+ @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700&family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap');
+@@ -186,38 +186,25 @@ body {
+   text-decoration: none;
+   font-family: var(--font-display);
+   line-height: 1;
++  display: inline-flex;
++  align-items: center;
+ }
+ 
+-.header-logo-top {
+-  font-size: 1.125rem;
+-  font-weight: 900;
+-  letter-spacing: 0.05em;
+-  color: #ffffff;
+-  transition: color 0.2s ease;
++.header-logo-img {
++  height: 2rem;
++  width: auto;
++  display: block;
++  transition: opacity 0.2s ease;
+ }
+ 
+ @media (min-width: 768px) {
+-  .header-logo-top {
+-    font-size: 1.25rem;
++  .header-logo-img {
++    height: 2.5rem;
+   }
+ }
+ 
+-.header-logo:hover .header-logo-top {
+-  color: var(--color-gold);
+-}
+-
+-.header-logo-bottom {
+-  font-size: 1.125rem;
+-  font-weight: 900;
+-  letter-spacing: 0.05em;
+-  color: var(--color-gold);
+-  margin-top: -0.25rem;
+-}
+-
+-@media (min-width: 768px) {
+-  .header-logo-bottom {
+-    font-size: 1.25rem;
+-  }
++.header-logo:hover .header-logo-img {
++  opacity: 0.85;
+ }
+ 
+ .header-nav {
+diff --git a/frontend/src/pages/admin/AdminLogin.jsx b/frontend/src/pages/admin/AdminLogin.jsx
+index 34c158a..0f618c8 100644
+--- a/frontend/src/pages/admin/AdminLogin.jsx
++++ b/frontend/src/pages/admin/AdminLogin.jsx
+@@ -55,9 +55,9 @@ export default function AdminLogin() {
+         </div>
+ 
+         {/* Heading */}
+-        <div className="admin-login-eyebrow">Kathmandu Night Run</div>
++        <div className="admin-login-eyebrow">Off Route</div>
+         <h1 className="admin-login-title">Admin Portal</h1>
+-        <p className="admin-login-subtitle">Manage the Kathmandu Night Run experience.</p>
++        <p className="admin-login-subtitle">Manage the Off Route experience.</p>
+ 
+         {/* Error Message */}
+         {error && (
+@@ -85,7 +85,7 @@ export default function AdminLogin() {
+                 id="admin-email"
+                 type="email"
+                 className="admin-form-input"
+-                placeholder="admin@kathmandunightrun.com"
++                placeholder="admin@offroute.com"
+                 value={email}
+                 onChange={(e) => setEmail(e.target.value)}
+                 autoComplete="email"
+diff --git a/frontend/src/pages/admin/EventsManagement.jsx b/frontend/src/pages/admin/EventsManagement.jsx
+index 54f66ce..ecd64bc 100644
+--- a/frontend/src/pages/admin/EventsManagement.jsx
++++ b/frontend/src/pages/admin/EventsManagement.jsx
+@@ -244,7 +244,7 @@ export default function EventsManagement() {
+         <div>
+           <h1 className="admin-events-title">EVENTS</h1>
+           <p className="admin-events-subtitle">
+-            Manage upcoming and past Kathmandu Night Run events.
++            Manage upcoming and past Off Route events.
+           </p>
+         </div>
+ 
+diff --git a/frontend/src/pages/admin/GalleryManagement.jsx b/frontend/src/pages/admin/GalleryManagement.jsx
+index 6eaa25e..9fc1052 100644
+--- a/frontend/src/pages/admin/GalleryManagement.jsx
++++ b/frontend/src/pages/admin/GalleryManagement.jsx
+@@ -203,7 +203,7 @@ export default function GalleryManagement() {
+         <div>
+           <h1 className="admin-events-title">GALLERY</h1>
+           <p className="admin-events-subtitle">
+-            Manage moments from the Kathmandu Night Run community.
++            Manage moments from the Off Route community.
+           </p>
+         </div>
+ 
+@@ -405,7 +405,7 @@ export default function GalleryManagement() {
+               <div>
+                 <h2 className="admin-modal-title">UPLOAD TO GALLERY</h2>
+                 <p className="admin-modal-subtitle">
+-                  Add high-resolution moments from Kathmandu Night Run events.
++                  Add high-resolution moments from Off Route events.
+                 </p>
+               </div>
+               <button
+diff --git a/frontend/src/pages/public/About.jsx b/frontend/src/pages/public/About.jsx
+index 30562e0..175321a 100644
+--- a/frontend/src/pages/public/About.jsx
++++ b/frontend/src/pages/public/About.jsx
+@@ -20,7 +20,7 @@ export default function AboutPage({ onNavigate }) {
+         <div className="hero-bg">
+           <img
+             src="/src/assets/four_friends.jpg"
+-            alt="Kathmandu Night Run Team Four Friends"
++            alt="Off Route Team Four Friends"
+             className="hero-img"
+             style={{ filter: "grayscale(100%) brightness(60%) contrast(130%)" }}
+           />
+@@ -147,7 +147,7 @@ export default function AboutPage({ onNavigate }) {
+             <ScrollReveal variant="fade-up" delay={400}>
+               <div className="story-body" style={{ color: "rgba(255,255,255,0.7)" }}>
+                 <p>
+-                  Today Kathmandu Night Run is two things at once. It is an open community that meets on the full moon and runs the valley's outskirts together, and it is a small team that designs private night events and curated trail-running journeys across Nepal.
++                  Today Off Route is two things at once. It is an open community that meets on the full moon and runs the valley's outskirts together, and it is a small team that designs private night events and curated trail-running journeys across Nepal.
+                 </p>
+                 <p>
+                   There is no membership and no pace requirement. People arrive on their own, run in a group and leave knowing a dozen more runners than they did.
+diff --git a/frontend/src/sections/OurStory.jsx b/frontend/src/sections/OurStory.jsx
+index b816d0d..8206af5 100644
+--- a/frontend/src/sections/OurStory.jsx
++++ b/frontend/src/sections/OurStory.jsx
+@@ -52,7 +52,7 @@ export default function OurStory() {
+           <ScrollReveal variant="fade-up" delay={350}>
+             <div className="story-body">
+               <p>
+-                Kathmandu Night Run began with four friends, no plan, no route  — just a few torches and a suspicion that the city was more interesting once it stopped shouting. 
++                Off Route began with four friends, no plan, no route  — just a few torches and a suspicion that the city was more interesting once it stopped shouting. 
+ 
+               </p>
+               <p>
+diff --git a/frontend/src/services/api.js b/frontend/src/services/api.js
+index fe2d453..71ae96c 100644
+--- a/frontend/src/services/api.js
++++ b/frontend/src/services/api.js
+@@ -1,5 +1,5 @@
+ /**
+- * API Service for Kathmandu Night Run Frontend
++ * API Service for Off Route Frontend
+  */
+ 
+ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';

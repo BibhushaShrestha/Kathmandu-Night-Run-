@@ -32,7 +32,7 @@ app.use("/api/", limiter);
 
 // --- Routes ---
 app.get("/", (req, res) => {
-  res.json({ message: "Kathmandu Night Run API is running" });
+  res.json({ message: "Off Route API is running" });
 });
 
 app.use("/api/auth", authRoutes);

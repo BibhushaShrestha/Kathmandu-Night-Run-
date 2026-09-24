@@ -69,7 +69,7 @@ export default function EventsPage({ onNavigate }) {
         <div className="hero-bg">
           <img
             src={group2}
-            alt="Kathmandu Night Run community group photo"
+            alt="Off Route community group photo"
             className="hero-img"
             style={{ filter: "grayscale(100%) brightness(55%) contrast(130%)" }}
           />

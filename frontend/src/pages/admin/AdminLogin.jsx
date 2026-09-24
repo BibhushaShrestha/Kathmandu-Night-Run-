@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import logoIcon from "../../assets/off-route-icon-white.png";
 import { useNavigate } from "react-router-dom";
 import { adminAuthService } from "../../services/api";
 import "../../admin.css";
@@ -48,16 +49,15 @@ export default function AdminLogin() {
       {/* Login Card */}
       <div className="admin-login-card">
         {/* Moon Icon */}
+        {/* Brand Icon */}
         <div className="admin-login-icon-box">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-          </svg>
+          <img src={logoIcon} alt="Off Route" className="admin-login-icon-img" />
         </div>
 
         {/* Heading */}
-        <div className="admin-login-eyebrow">Kathmandu Night Run</div>
+        <div className="admin-login-eyebrow">Off Route</div>
         <h1 className="admin-login-title">Admin Portal</h1>
-        <p className="admin-login-subtitle">Manage the Kathmandu Night Run experience.</p>
+        <p className="admin-login-subtitle">Manage the Off Route experience.</p>
 
         {/* Error Message */}
         {error && (
@@ -85,7 +85,7 @@ export default function AdminLogin() {
                 id="admin-email"
                 type="email"
                 className="admin-form-input"
-                placeholder="admin@kathmandunightrun.com"
+                placeholder="admin@offroute.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 autoComplete="email"

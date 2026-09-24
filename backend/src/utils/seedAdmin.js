@@ -11,7 +11,7 @@ dotenv.config();
 const run = async () => {
   await mongoose.connect(process.env.MONGO_URI);
 
-  const existing = await Admin.findOne({ email: "admin@kathmandunightrun.com" });
+  const existing = await Admin.findOne({ email: "admin@offroute.com" });
   if (existing) {
     console.log("Admin already exists, seed nagarikan.");
     process.exit(0);
@@ -21,7 +21,7 @@ const run = async () => {
 
   await Admin.create({
     name: "Bibhusha Shrestha",
-    email: "admin@kathmandunightrun.com",
+    email: "admin@offroute.com",
     password: hashedPassword,
     role: "Administrator",
   });

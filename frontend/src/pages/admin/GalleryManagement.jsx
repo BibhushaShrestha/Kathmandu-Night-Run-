@@ -203,7 +203,7 @@ export default function GalleryManagement() {
         <div>
           <h1 className="admin-events-title">GALLERY</h1>
           <p className="admin-events-subtitle">
-            Manage moments from the Kathmandu Night Run community.
+            Manage moments from the Off Route community.
           </p>
         </div>
 
@@ -405,7 +405,7 @@ export default function GalleryManagement() {
               <div>
                 <h2 className="admin-modal-title">UPLOAD TO GALLERY</h2>
                 <p className="admin-modal-subtitle">
-                  Add high-resolution moments from Kathmandu Night Run events.
+                  Add high-resolution moments from Off Route events.
                 </p>
               </div>
               <button

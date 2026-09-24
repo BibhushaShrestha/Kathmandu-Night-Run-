@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import logo from "../assets/off-route-logo-white.png";
 
 export default function Header({ currentPath = "home", onNavigate }) {
   const [open, setOpen] = useState(false);
@@ -71,8 +72,7 @@ export default function Header({ currentPath = "home", onNavigate }) {
           }
           className="header-logo"
         >
-          <div className="header-logo-top">KATHMANDU</div>
-          <div className="header-logo-bottom">NIGHT RUN</div>
+          <img src={logo} alt="Off Route" className="header-logo-img" />
         </a>
 
         {/* Desktop Navigation */}

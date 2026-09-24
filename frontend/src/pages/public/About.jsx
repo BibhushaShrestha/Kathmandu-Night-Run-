@@ -20,7 +20,7 @@ export default function AboutPage({ onNavigate }) {
         <div className="hero-bg">
           <img
             src="/src/assets/four_friends.jpg"
-            alt="Kathmandu Night Run Team Four Friends"
+            alt="Off Route Team Four Friends"
             className="hero-img"
             style={{ filter: "grayscale(100%) brightness(60%) contrast(130%)" }}
           />
@@ -147,7 +147,7 @@ export default function AboutPage({ onNavigate }) {
             <ScrollReveal variant="fade-up" delay={400}>
               <div className="story-body" style={{ color: "rgba(255,255,255,0.7)" }}>
                 <p>
-                  Today Kathmandu Night Run is two things at once. It is an open community that meets on the full moon and runs the valley's outskirts together, and it is a small team that designs private night events and curated trail-running journeys across Nepal.
+                  Today Off Route is two things at once. It is an open community that meets on the full moon and runs the valley's outskirts together, and it is a small team that designs private night events and curated trail-running journeys across Nepal.
                 </p>
                 <p>
                   There is no membership and no pace requirement. People arrive on their own, run in a group and leave knowing a dozen more runners than they did.

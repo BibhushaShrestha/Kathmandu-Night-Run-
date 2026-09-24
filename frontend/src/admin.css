@@ -1,5 +1,5 @@
 /* ==========================================================================
-   KATHMANDU NIGHT RUN — Pure Vanilla CSS Admin System Stylesheet
+   OFF ROUTE — Pure Vanilla CSS Admin System Stylesheet
    ========================================================================== */
 
 /* --- Admin Theme Variables --- */
@@ -63,35 +63,10 @@
   margin-bottom: 2rem;
 }
 
-.admin-logo-icon {
-  width: 36px;
-  height: 36px;
-  background-color: var(--admin-active-bg);
-  border: 1px solid var(--admin-active-border);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--admin-gold);
-}
-
-.admin-logo-text-top {
-  font-family: var(--font-display);
-  font-size: 1.125rem;
-  font-weight: 900;
-  letter-spacing: 0.05em;
-  color: #ffffff;
-  line-height: 1;
-}
-
-.admin-logo-text-bottom {
-  font-family: var(--font-display);
-  font-size: 1.125rem;
-  font-weight: 900;
-  letter-spacing: 0.05em;
-  color: var(--admin-gold);
-  line-height: 1;
-  margin-top: -2px;
+.admin-logo-img {
+  height: 2.25rem;
+  width: auto;
+  display: block;
 }
 
 .admin-nav-list {
@@ -678,6 +653,12 @@
   align-items: center;
   justify-content: center;
   margin: 0 auto 1.5rem;
+}
+
+.admin-login-icon-img {
+  width: 28px;
+  height: 28px;
+  display: block;
 }
 
 .admin-login-eyebrow {

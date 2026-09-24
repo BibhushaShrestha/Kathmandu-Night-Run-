@@ -48,7 +48,7 @@ export default function Gallery() {
 
         {/* Caption */}
         <ScrollReveal variant="fade-up" delay={500}>
-          <p className="gallery-caption">TAG @KATHMANDUNIGHTRUN TO BE FEATURED.</p>
+          <p className="gallery-caption">TAG @OFFROUTE TO BE FEATURED.</p>
         </ScrollReveal>
       </div>
     </section>

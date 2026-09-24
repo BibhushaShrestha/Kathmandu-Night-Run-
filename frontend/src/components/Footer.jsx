@@ -1,5 +1,6 @@
 // src/components/Footer.jsx
 import React from "react";
+import logo from "../assets/off-route-logo-white.png";
 
 export default function Footer({ onNavigate }) {
   const navLinks = [
@@ -27,16 +28,15 @@ export default function Footer({ onNavigate }) {
       <div className="container-max footer-grid">
         {/* Brand Col */}
         <div className="footer-col-brand">
-          <a href="#hero" onClick={(e) => handleClick(e, { path: "home", href: "#hero" })} className="header-logo" style={{ display: "block" }}>
-            <div className="header-logo-top" style={{ fontSize: "1.5rem" }}>KATHMANDU</div>
-            <div className="header-logo-bottom" style={{ fontSize: "1.5rem" }}>NIGHT RUN</div>
+    <a href="#hero" onClick={(e) => handleClick(e, { path: "home", href: "#hero" })} className="header-logo">
+            <img src={logo} alt="Off Route" className="header-logo-img" style={{ height: "2.5rem" }} />
           </a>
           <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.75rem", fontWeight: "700", letterSpacing: "0.2em", marginTop: "1rem", textTransform: "uppercase" }}>
             EXPERIENCE KATHMANDU AFTER DARK.
           </p>
           <div style={{ marginTop: "2rem", display: "flex", flexDirection: "column", gap: "0.5rem", color: "rgba(255,255,255,0.7)", fontSize: "0.875rem" }}>
-            <p>@Off Route</p>
-            <p>hello@Off Route.com</p>
+           <p>@offroute</p>
+            <p>hello@offroute.com</p>
             <p>Kathmandu, Nepal</p>
           </div>
         </div>

@@ -52,7 +52,7 @@ export default function OurStory() {
           <ScrollReveal variant="fade-up" delay={350}>
             <div className="story-body">
               <p>
-                Kathmandu Night Run began with four friends, no plan, no route  — just a few torches and a suspicion that the city was more interesting once it stopped shouting. 
+                Off Route began with four friends, no plan, no route  — just a few torches and a suspicion that the city was more interesting once it stopped shouting. 
 
               </p>
               <p>

@@ -160,11 +160,11 @@ export default function ContactPage({ onNavigate }) {
                 <div className="contact-dark-label">REACH US</div>
                 <div className="contact-reach-item">
                   <span className="contact-reach-icon">◎</span>
-                  <span>@kathmandunightrun</span>
+                                    <span>@offroute</span>
                 </div>
                 <div className="contact-reach-item">
                   <span className="contact-reach-icon">✉</span>
-                  <span>hello@kathmandunightrun.com</span>
+                  <span>hello@offroute.com</span>
                 </div>
                 <div className="contact-reach-item">
                   <span className="contact-reach-icon">📍</span>

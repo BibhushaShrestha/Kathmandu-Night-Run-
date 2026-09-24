@@ -87,7 +87,7 @@ export default function ServicesPage({ onNavigate }) {
 
             <ScrollReveal variant="fade-up" delay={400}>
               <p style={{ marginTop: "1.5rem", color: "var(--color-text-muted)", fontSize: "0.9375rem", lineHeight: "1.7" }}>
-                Our full moon runs are the heart of Kathmandu Night Run. Once a month, when the valley goes quiet and the moon does most of the lighting, we gather at a meeting point on the edge of the city and run together — temples, back roads, forest tracks and ridgelines. No entry fee culture, no race clock, no pressure. Runners of every pace show up, and nobody finishes alone.
+                Our full moon runs are the heart of Off Route. Once a month, when the valley goes quiet and the moon does most of the lighting, we gather at a meeting point on the edge of the city and run together — temples, back roads, forest tracks and ridgelines. No entry fee culture, no race clock, no pressure. Runners of every pace show up, and nobody finishes alone.
               </p>
             </ScrollReveal>
 

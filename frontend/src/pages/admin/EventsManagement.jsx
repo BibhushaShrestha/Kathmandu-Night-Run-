@@ -244,7 +244,7 @@ export default function EventsManagement() {
         <div>
           <h1 className="admin-events-title">EVENTS</h1>
           <p className="admin-events-subtitle">
-            Manage upcoming and past Kathmandu Night Run events.
+            Manage upcoming and past Off Route events.
           </p>
         </div>
 
