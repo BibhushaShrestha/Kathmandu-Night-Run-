@@ -1,6 +1,8 @@
 import React from "react";
 import ScrollReveal from "../components/ScrollReveal.jsx";
-
+import group1 from "../assets/group1.jpg";
+import group2 from "../assets/group2.jpg";
+import nightrun2 from "../assets/nightrun2.jpg";
 
 export default function ThreeWays() {
   const experiences = [
@@ -9,7 +11,7 @@ export default function ThreeWays() {
       title: "COMMUNITY RUN EVENTS",
       desc: "Every full moon, run Kathmandu's outskirts with the community.",
       cta: "EXPLORE FULL MOON RUNS",
-      image: "/src/assets/group1.jpg",
+       image: group1,
       href: "#next-event",
     },
     {
@@ -17,7 +19,7 @@ export default function ThreeWays() {
       title: "SPECIALIZED RUNNING EVENTS",
       desc: "Custom running experiences for birthdays, celebrations and milestones.",
       cta: "PLAN YOUR EVENT",
-      image: "/src/assets/group2.jpg",
+      image: group2.jpg,
       href: "#services",
     },
     {
@@ -25,7 +27,7 @@ export default function ThreeWays() {
       title: "CURATED TRAIL RUNNING",
       desc: "Custom trail-running journeys across Nepal.",
       cta: "PLAN YOUR TRAIL TRIP",
-      image: "/src/assets/nightrun2.jpg",
+      image: nightrun2.jpg,
       href: "#services",
     },
   ];

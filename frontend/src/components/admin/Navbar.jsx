@@ -3,7 +3,7 @@ import React from "react";
 export default function Navbar({ onMobileToggle, user }) {
   const currentUser = user || { name: "Bibhusha Shrestha", role: "Administrator" };
 
-  return (
+   return ( 
     <header className="admin-navbar">
       <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
         {/* Mobile Sidebar Toggle Button */}
