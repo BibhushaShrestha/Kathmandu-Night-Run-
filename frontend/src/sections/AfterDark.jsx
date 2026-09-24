@@ -1,5 +1,6 @@
 import React from "react";
 import ScrollReveal from "../components/ScrollReveal.jsx";
+import viewImage from "../assets/view.jpg";
 
 export default function AfterDark() {
   return (
@@ -35,7 +36,7 @@ export default function AfterDark() {
         <div className="afterdark-col-right">
           <ScrollReveal variant="fade-left" delay={250} duration={900}>
             <div className="afterdark-img-box">
-              <img src="src/assets/view.jpg" alt="Kathmandu after dark moonlit stupa"
+              <img src={viewImage} alt="Kathmandu after dark moonlit stupa"
                 style={{ width: "100%", height: "100%", objectFit: "cover", filter: "grayscale(100%) contrast(150%) brightness(90%)" }} />
               <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.5), transparent)" }} />
               <div className="afterdark-img-tag">MOONLIT TRAILS & TEMPLES</div>

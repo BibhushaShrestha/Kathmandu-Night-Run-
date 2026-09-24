@@ -1,5 +1,11 @@
 import React from "react";
 import ScrollReveal from "../components/ScrollReveal.jsx";
+import Kathmandu_valley from "../assets/kathmandu_valley.jpg";
+import night_run from "../assets/night_run.jpg";
+import nightrun from "../assets/nightrun3.jpg";
+import group1 from "../assets/group1.jpg";
+
+
 
 export default function FieldNotes() {
   const notes = [
@@ -7,19 +13,19 @@ export default function FieldNotes() {
       tag: "FULL MOON RUNS",
       title: "The Valley Winds Down",
       desc: "There is a moment, somewhere after ten, when Kathmandu stops being a traffic problem and becomes a city again.",
-      image: "src/assets/kathmandu_valley.jpg",
+      image: Kathmandu_valley,
     },
     {
       tag: "ROUTE GUIDES",
       title: "Running the Terraces of Dhading",
       desc: "Two hours from Kathmandu, the road runs out and the terraces start. Notes from a recon weekend.",
-      image: "src/assets/night_run.jpg",
+      image: night_run,
     },
     {
       tag: "TRAINING",
       title: "Training for Night Trail",
       desc: "Running in the dark is a skill, not a handicap. How to build it without scaring yourself off trail.",
-      image: "src/assets/nightrun3.jpg",
+      image: nightrun,
     },
   ];
 
@@ -43,7 +49,7 @@ export default function FieldNotes() {
               <div style={{ cursor: "pointer" }}>
                 <div style={{ aspectRatio: "4/3", backgroundColor: "#1A1A18", overflow: "hidden", boxShadow: "0 10px 30px rgba(0,0,0,0.1)" }}>
                   <img
-                    src="src/assets/group1.jpg"
+                    src={group1}
                     alt="What to Carry on a Full Moon Run"
                     style={{ width: "100%", height: "100%", objectFit: "cover", filter: "grayscale(100%) contrast(125%)" }}
                   />

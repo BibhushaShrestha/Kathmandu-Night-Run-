@@ -1,5 +1,6 @@
 import React from "react";
 import ScrollReveal from "../components/ScrollReveal.jsx";
+import nightrun2 from "../assets/nightrun2.jpg";
 
 export default function Testimonials() {
   const quotes = [
@@ -41,7 +42,7 @@ export default function Testimonials() {
           <ScrollReveal variant="zoom-in" delay={250} duration={850}>
             <div style={{ marginTop: "2.5rem", aspectRatio: "4/3", backgroundColor: "#1A1A18", overflow: "hidden", boxShadow: "0 20px 40px rgba(0,0,0,0.15)" }}>
               <img
-                src="src/assets/nightrun2.jpg"
+                src={nightrun2}
                 alt="Community Runners"
                 style={{ width: "100%", height: "100%", objectFit: "cover", filter: "grayscale(100%) contrast(125%)" }}
               />
