@@ -30,7 +30,7 @@ export default function Header({ currentPath = "home", onNavigate }) {
     { name: "EVENTS", path: "events", href: "#events-hero" },
     { name: "ROUTES", path: "home", href: "#after-dark" },
     { name: "FIELD NOTES", path: "fieldnotes", href: "#fieldnotes-hero" },
-    { name: "GALLERY", path: "home", href: "#run-with-us" },
+    { name: "GALLERY", path: "home", href: "#gallery" },
     { name: "CONTACT", path: "contact", href: "#contact-hero" },
   ];
 
