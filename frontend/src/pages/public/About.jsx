@@ -3,7 +3,6 @@ import Header from "../../components/Header.jsx";
 import ScrollReveal from "../../components/ScrollReveal.jsx";
 import Footer from "../../components/Footer.jsx";
 import fourfriends from "../assets/four_friends.jpg";
-import fourfriends from "../assets/four_friends.jpg";
 import nightrun from "../assets/nightrun2.jpg";
 import group2 from "../assets/group2.jpg";
 import kathmanduvalley from "../assets/kathmandu_valley.jpg";
