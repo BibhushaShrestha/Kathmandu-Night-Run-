@@ -2,6 +2,14 @@ import React, { useEffect } from "react";
 import Header from "../../components/Header.jsx";
 import ScrollReveal from "../../components/ScrollReveal.jsx";
 import Footer from "../../components/Footer.jsx";
+import fourfriends from "../assets/four_friends.jpg";
+import fourfriends from "../assets/four_friends.jpg";
+import nightrun from "../assets/nightrun2.jpg";
+import group2 from "../assets/group2.jpg";
+import kathmanduvalley from "../assets/kathmandu_valley.jpg";
+
+
+
 
 export default function AboutPage({ onNavigate }) {
   useEffect(() => {
@@ -19,7 +27,7 @@ export default function AboutPage({ onNavigate }) {
         {/* Background Image & Overlay */}
         <div className="hero-bg">
           <img
-            src="/src/assets/four_friends.jpg"
+            src={fourfriends}
             alt="Off Route Team Four Friends"
             className="hero-img"
             style={{ filter: "grayscale(100%) brightness(60%) contrast(130%)" }}
@@ -76,7 +84,7 @@ export default function AboutPage({ onNavigate }) {
             <ScrollReveal variant="fade-right" delay={150} duration={900}>
               <div className="story-img-container">
                 <img
-                  src="/src/assets/four_friends.jpg"
+                  src={fourfriends}
                   alt="Four Friends How It Started"
                   className="story-img"
                 />
@@ -161,7 +169,7 @@ export default function AboutPage({ onNavigate }) {
             <ScrollReveal variant="fade-left" delay={250} duration={900}>
               <div className="story-img-container" style={{ backgroundColor: "#0E1E18", border: "1px solid rgba(255,255,255,0.1)" }}>
                 <img
-                  src="/src/assets/nightrun2.jpg"
+                  src={nightrun}
                   alt="Runners sitting on temple steps at night"
                   className="story-img"
                 />
@@ -182,7 +190,7 @@ export default function AboutPage({ onNavigate }) {
             <ScrollReveal variant="fade-right" delay={150} duration={900}>
               <div className="story-img-container">
                 <img
-                  src="/src/assets/group2.jpg"
+                  src={group2}
                   alt="Runner in moonlit night alleyway"
                   className="story-img"
                   style={{ filter: "grayscale(100%) contrast(140%)" }}
@@ -268,7 +276,7 @@ export default function AboutPage({ onNavigate }) {
             <ScrollReveal variant="fade-left" delay={250} duration={900}>
               <div className="story-img-container" style={{ backgroundColor: "#0E1E18", border: "1px solid rgba(255,255,255,0.1)" }}>
                 <img
-                  src="/src/assets/kathmandu_valley.jpg"
+                  src={kathmanduvalley}
                   alt="Boudhanath Stupa under Full Moon"
                   className="story-img"
                 />
