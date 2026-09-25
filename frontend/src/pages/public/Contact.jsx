@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/Header.jsx";
 import Footer from "../../components/Footer.jsx";
 import ScrollReveal from "../../components/ScrollReveal.jsx";
+import group2 from "../../assets/group2.jpg";
 
 export default function ContactPage({ onNavigate }) {
   useEffect(() => {
@@ -49,7 +50,7 @@ export default function ContactPage({ onNavigate }) {
       <section id="contact-hero" className="hero-section" style={{ minHeight: "68vh" }}>
         <div className="hero-bg">
           <img
-            src="/src/assets/group2.jpg"
+            src={group2}
             alt="Kathmandu Night Run community group photo"
             className="hero-img"
             style={{ filter: "grayscale(100%) brightness(55%) contrast(130%)" }}

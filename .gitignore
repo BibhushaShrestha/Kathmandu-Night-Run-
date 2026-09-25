@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Secrets / environment
+.env
+.env.local
+*.env.local
+
+# Build output
+dist/
+build/
+
+# Backups and logs
+backups/
+*.log
+npm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Git worktrees
+.worktrees/
+
+
+# Release package build output
+/.release-package/
+/offroute-release-*.tar.gz
