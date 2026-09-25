@@ -18,10 +18,25 @@ connectDB(); // MongoDB sanga connect garne
 const app = express();
 
 // --- Middleware ---
+// Host nginx terminates TLS and sets X-Forwarded-*; trust one proxy hop so
+// express-rate-limit reads the real client IP instead of throwing
+// ERR_ERL_UNEXPECTED_X_FORWARDED_FOR.
+app.set("trust proxy", 1);
+
 app.use(helmet());
-app.use(cors());
-app.use(express.json());
-app.use(morgan("dev"));
+
+// Restrict browser origins when CORS_ORIGIN is configured (prod is
+// same-origin, so this is a hardening measure); otherwise keep the previous
+// permissive behavior for local development.
+const corsOptions = process.env.CORS_ORIGIN
+  ? { origin: process.env.CORS_ORIGIN.split(",").map((o) => o.trim()) }
+  : {};
+app.use(cors(corsOptions));
+
+// Allow base64 image payloads stored by the gallery/route models.
+app.use(express.json({ limit: "10mb" }));
+// Morgan: "combined" feeds production log pipelines; "dev" is for local work.
+app.use(morgan(process.env.NODE_ENV === "production" ? "combined" : "dev"));
 app.use(compression());
 
 const limiter = rateLimit({
